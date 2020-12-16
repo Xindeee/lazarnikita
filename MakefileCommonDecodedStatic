@@ -1,0 +1,17 @@
+curpath="D:\Builder\C\MakefileTEST\Encoder, Decoder, String Utils"
+
+all: decoder
+
+libmylib.lib: StringFormatter.o StringEncoder.o
+	ar rcs libmylib.lib StringFormatter.o StringEncoder.o StringEncoder.h StringFormatter.h 
+	
+StringFormatter.o:
+	gcc -c StringFormatter.c StringFormatter.h
+StringEncoder.o:
+	gcc -c StringEncoder.c StringEncoder.h
+	
+DopuskKZachetuDecoded.o: StringFormatter.o StringEncoder.o
+	gcc -c DopuskKZachetuDecoded.c StringEncoder.h StringFormatter.h
+	
+decoder: libmylib.lib DopuskKZachetuDecoded.o
+	gcc -o decoder DopuskKZachetuDecoded.o -L$(curpath) -lmylib
