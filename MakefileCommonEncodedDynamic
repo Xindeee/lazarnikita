@@ -6,12 +6,12 @@ libmylib.dll: StringFormatter.o StringEncoder.o
 	gcc -shared -o libmylib.dll StringFormatter.o StringEncoder.o StringEncoder.h StringFormatter.h
 	 
 StringFormatter.o:
-	gcc -c StringFormatter.c StringFormatter.h
+	gcc -std=c99 -c StringFormatter.c StringFormatter.h
 StringEncoder.o:
-	gcc -c StringEncoder.c StringEncoder.h
+	gcc -std=c99 -c StringEncoder.c StringEncoder.h
 	
 DopuskKZachetuEncoded.o: StringFormatter.o StringEncoder.o
-	gcc -c DopuskKZachetuEncoded.c StringEncoder.h StringFormatter.h
+	gcc -std=c99 -c DopuskKZachetuEncoded.c StringEncoder.h StringFormatter.h
 	
 encoder: libmylib.dll DopuskKZachetuEncoded.o
 	gcc -o encoder DopuskKZachetuEncoded.o -L$(curpath) -lmylib
